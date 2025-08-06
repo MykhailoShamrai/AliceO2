@@ -1,0 +1,3 @@
+[submodule "Framework/Core/EventMixing2"]
+	path = Framework/Core/EventMixing2
+	url = git@github.com:chefxxx/EventMixing2.git

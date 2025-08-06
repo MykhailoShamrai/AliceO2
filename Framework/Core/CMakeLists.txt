@@ -8,7 +8,16 @@
 # In applying this license CERN does not waive the privileges and immunities
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
+add_subdirectory(EventMixing2)
+install(TARGETS EventMixing2_lib
+	EXPORT O2Targets
+	INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
+install(DIRECTORY EventMixing2/lib/
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/EventMixing2
+	FILES_MATCHING PATTERN "*.h")
+	
 o2_add_library(Framework
                SOURCES src/AODReaderHelpers.cxx
                        src/AnalysisHelpers.cxx
@@ -178,7 +187,8 @@ o2_add_library(Framework
                                      O2::FrameworkLogger
                                      Gandiva::gandiva_shared
                                      LibUV::LibUV
-                                     )
+				     EM::EventMixing2_lib 
+				     )
 
 # To get the necessary include for the MC status codes. Needs to be public, for instance O2Physics heavily depends on Framework
 target_include_directories(${targetName} PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/DataFormats/simulation/include>)
